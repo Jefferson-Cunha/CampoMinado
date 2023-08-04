@@ -182,5 +182,22 @@ public class CampoTest {
 			assertTrue(campo.isAberto() && vizinho2.isFechado());
 		}
 
-
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 }

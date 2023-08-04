@@ -46,16 +46,20 @@ public class Campo {
 
 	}
 
-	// Gets da Classe Campo.
+	// Gets e Sets da Classe Campo.
 
 	boolean isMinado() {
 		return minado;
+	}
+	
+	void setAberto(boolean aberto){
+		this.aberto = aberto;
 	}
 
 	boolean isAberto() {
 		return aberto;
 	}
-	
+
 	boolean isFechado() {
 		return !aberto;
 	}
@@ -63,6 +67,16 @@ public class Campo {
 	boolean isMarcado() {
 		return marcado;
 	}
+
+	public int getLinha() {
+		return linha;
+	}
+
+	public int getColuna() {
+		return coluna;
+	}
+	
+	
 
 	// Função para alterar a marcação do campo!
 
@@ -76,7 +90,7 @@ public class Campo {
 
 	void minar() {
 		if (!minado) {
-			minado = !minado; 
+			minado = !minado;
 		}
 	}
 
@@ -105,4 +119,49 @@ public class Campo {
 		return vizinhos.stream().noneMatch(v -> v.minado);
 	}
 
+	boolean objetivoAlcancasdo() {
+		boolean desvendado = !minado && aberto;
+		boolean protegido = minado && marcado;
+
+		return desvendado || protegido;
+	}
+
+	long minasNaVizinhanca() {
+		return vizinhos.stream().filter(v -> v.minado).count();	
+	}
+	
+	
+	void reiniciar() {
+		aberto = false;
+		minado = false;
+		marcado = false;
+	}
+
+	
+	public String toString() {
+		if(marcado) {
+			return "X";
+		} else if(aberto && minado) {
+			return "*";
+		} else if (aberto && minasNaVizinhanca() > 0){
+			return Long.toString(minasNaVizinhanca());
+		} else if (aberto) {
+			return " ";
+		} else {
+			return "?";
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
